@@ -20,3 +20,10 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`✅ Server is running on port ${port}`);
 });
+
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason) => {
+    console.error('Unhandled Rejection:', reason);
+});

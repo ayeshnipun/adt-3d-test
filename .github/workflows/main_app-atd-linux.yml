@@ -39,7 +39,6 @@ jobs:
             package.json
             package-lock.json
             src
-            node_modules
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,6 +59,9 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_87D5497254D34229B3FB99BF7B689BD3 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F173125D936D46DF96084063791C6C8B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_33D090CDFB41416F8B329AF68FBA8040 }}
+
+      - name: Install dependencies on Azure WebApp
+        run: npm ci --only=
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
