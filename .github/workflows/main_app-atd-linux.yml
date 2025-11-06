@@ -27,6 +27,7 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+          npm prune --production
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -37,6 +38,8 @@ jobs:
             server.js
             package.json
             package-lock.json
+            src
+            node_modules
 
   deploy:
     runs-on: ubuntu-latest
@@ -65,3 +68,5 @@ jobs:
           app-name: "app-atd-linux"
           slot-name: "Production"
           package: .
+          app-settings: |
+            WEBSITE_NODE_DEFAULT_VERSION=~24
